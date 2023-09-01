@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import type { ICharacter } from '../models/ICharacter.ts';
 import Button from '../UI/AppButton.vue'
 
 import thumbnailImage from '../assets/images/thumbnail.png'
+
+const char = ref<ICharacter>()
+const randomId = ref(Math.floor(Math.random() * (1011400 - 1011000)) + 1011000);
 </script>
 
 <template>

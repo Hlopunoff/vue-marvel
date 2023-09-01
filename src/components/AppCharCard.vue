@@ -1,13 +1,19 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import type { ICharacter } from '@/models/ICharacter'
+import fakeImage from '../assets/images/loki.jpg';
 
 const props = defineProps<ICharacter>()
+
+const thumbnail = computed(() => {
+  return props.thumbnail.path === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ? fakeImage : `${props.thumbnail.path}.${props.thumbnail.extension}`;
+})
 </script>
 
 <template>
   <div class="card">
     <div class="card__img">
-      <img :src="props.thumbnail.path" :alt="props.name" />
+      <img :src="thumbnail" :alt="props.name" />
     </div>
     <div class="card__info">
       <h3 class="card__title">{{ props.name }}</h3>

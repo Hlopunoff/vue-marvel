@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import CharCard from './AppCharCard.vue'
 import Button from '../UI/AppButton.vue'
 
@@ -7,111 +7,112 @@ import tempCharImage from '../assets/images/loki.jpg'
 
 import type { ICharacter } from '@/models/ICharacter'
 
+let data = ref<ICharacter[]>([]);
+
 onMounted(() => {
   const getData = async () => {
     try {
       const response = await fetch(
-        'https://gateway.marvel.com:443/v1/public/characters?orderBy=modified&limit=9&offset=210&apikey=2c8a14a356572e1c302e1a3d414636c4',
-        { mode: 'no-cors' }
+        'https://gateway.marvel.com:443/v1/public/characters?limit=9&offset=210&apikey=2c8a14a356572e1c302e1a3d414636c4'
       )
 
       if (!response.ok) {
         throw new Error(`${response.status}: ${response.statusText}`)
       }
 
-      const data = await response.json()
-      console.log(data)
+      data.value = (await response.json()).data.results
+      console.log(data.value[0].thumbnail);
     } catch (error) {
       console.error((error as Error).message)
     }
   }
 
-  // getData()
+  getData()
 })
 
-const data: ICharacter[] = [
-  {
-    id: 1,
-    name: 'Loki',
-    description: 'Some description',
-    thumbnail: {
-      path: tempCharImage,
-      extension: 'jpg'
-    }
-  },
-  {
-    id: 2,
-    name: 'Loki',
-    description: 'Some description',
-    thumbnail: {
-      path: tempCharImage,
-      extension: 'jpg'
-    }
-  },
-  {
-    id: 3,
-    name: 'Loki',
-    description: 'Some description',
-    thumbnail: {
-      path: tempCharImage,
-      extension: 'jpg'
-    }
-  },
-  {
-    id: 4,
-    name: 'Loki',
-    description: 'Some description',
-    thumbnail: {
-      path: tempCharImage,
-      extension: 'jpg'
-    }
-  },
-  {
-    id: 5,
-    name: 'Loki',
-    description: 'Some description',
-    thumbnail: {
-      path: tempCharImage,
-      extension: 'jpg'
-    }
-  },
-  {
-    id: 6,
-    name: 'Loki',
-    description: 'Some description',
-    thumbnail: {
-      path: tempCharImage,
-      extension: 'jpg'
-    }
-  },
-  {
-    id: 7,
-    name: 'Loki',
-    description: 'Some description',
-    thumbnail: {
-      path: tempCharImage,
-      extension: 'jpg'
-    }
-  },
-  {
-    id: 8,
-    name: 'Loki',
-    description: 'Some description',
-    thumbnail: {
-      path: tempCharImage,
-      extension: 'jpg'
-    }
-  },
-  {
-    id: 9,
-    name: 'Loki',
-    description: 'Some description',
-    thumbnail: {
-      path: tempCharImage,
-      extension: 'jpg'
-    }
-  }
-]
+// const data: ICharacter[] = [
+//   {
+//     id: 1,
+//     name: 'Loki',
+//     description: 'Some description',
+//     thumbnail: {
+//       path: tempCharImage,
+//       extension: 'jpg'
+//     }
+//   },
+//   {
+//     id: 2,
+//     name: 'Loki',
+//     description: 'Some description',
+//     thumbnail: {
+//       path: tempCharImage,
+//       extension: 'jpg'
+//     }
+//   },
+//   {
+//     id: 3,
+//     name: 'Loki',
+//     description: 'Some description',
+//     thumbnail: {
+//       path: tempCharImage,
+//       extension: 'jpg'
+//     }
+//   },
+//   {
+//     id: 4,
+//     name: 'Loki',
+//     description: 'Some description',
+//     thumbnail: {
+//       path: tempCharImage,
+//       extension: 'jpg'
+//     }
+//   },
+//   {
+//     id: 5,
+//     name: 'Loki',
+//     description: 'Some description',
+//     thumbnail: {
+//       path: tempCharImage,
+//       extension: 'jpg'
+//     }
+//   },
+//   {
+//     id: 6,
+//     name: 'Loki',
+//     description: 'Some description',
+//     thumbnail: {
+//       path: tempCharImage,
+//       extension: 'jpg'
+//     }
+//   },
+//   {
+//     id: 7,
+//     name: 'Loki',
+//     description: 'Some description',
+//     thumbnail: {
+//       path: tempCharImage,
+//       extension: 'jpg'
+//     }
+//   },
+//   {
+//     id: 8,
+//     name: 'Loki',
+//     description: 'Some description',
+//     thumbnail: {
+//       path: tempCharImage,
+//       extension: 'jpg'
+//     }
+//   },
+//   {
+//     id: 9,
+//     name: 'Loki',
+//     description: 'Some description',
+//     thumbnail: {
+//       path: tempCharImage,
+//       extension: 'jpg'
+//     }
+//   }
+// ]
 </script>
 
 <template>
