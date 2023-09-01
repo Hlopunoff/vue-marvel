@@ -1,0 +1,11 @@
+@function to-em($child, $parent: 16) {
+  @return calc($child / $parent) + em;
+}
+
+@function to-rem($fontSize) {
+  @return calc($fontSize / 16) + rem;
+}
+
+@function to-prc($child, $parent) {
+  @return calc($child / $parent) * 100%;
+}
